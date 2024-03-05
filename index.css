@@ -1,0 +1,80 @@
+:root {
+    --theme-color-1: #EEE;
+    --theme-color-2: #CCC;
+    --theme-color-3: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --theme-color-1: #333;
+        --theme-color-2: #444;
+        --theme-color-3: #EEE;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 18px;
+    color: var(--theme-color-3)
+}
+
+body,
+#menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--theme-color-1);
+}
+
+canvas {
+    width: calc(min(100vw / 360, 100vh / 180) * 360);
+    height: calc(min(100vw / 360, 100vh / 180) * 180);
+    background-color: #09F;
+}
+
+@media (prefers-color-scheme: dark) {
+    canvas {
+        filter: hue-rotate(180deg) invert() saturate(75%);
+    }
+}
+
+#menu {
+    display: none;
+}
+
+#menu+section {
+    position: absolute;
+    transition: translate 0.3s;
+    translate: 0;
+    background-color: var(--theme-color-2);
+    width: 50%;
+    height: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    padding: 15px;
+    gap: 15px;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 15px #000);
+}
+
+#menu:not(:checked)+section {
+    translate: 0 -100vh;
+}
+
+textarea {
+    background-color: var(--theme-color-1);
+    resize: none;
+}
+
+button {
+    grid-column: 1 / span 2;
+    background-color: var(--theme-color-1);
+    border: none;
+    border-radius: 5px;
+}
